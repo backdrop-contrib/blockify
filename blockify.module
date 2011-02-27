@@ -58,14 +58,16 @@ function blockify_block($op = 'list', $delta = 0, $edit = array()) {
     case 'list':
       $block_list = _blockify_get_blocks();
       foreach($block_list as $block_delta => $block_name){
-        $blocks[$block_delta]['info'] = $block_name;
+        if (_blockify_is_enabled($block_delta)){
+          $blocks[$block_delta]['info'] = $block_name;
+        }
       }
       return $blocks;
 
     case 'view':
       $blocks = _blockify_get_blocks();
       foreach ($blocks as $block_delta => $block_name){
-        if ($delta == $block_delta){
+        if ($delta == $block_delta && _blockify_is_enabled($block_delta)){
           $block['subject'] = '';
           $block['content'] = blockify_get_content($delta);          
         }
@@ -181,4 +183,12 @@ function _blockify_get_blocks($enabled_blocks_only = TRUE){
     'blockify-page-messages-status' => t('[blockify] Page status messages'),
     'blockify-page-messages-all' => t('[blockify] Page all messages'),
   );
+}
+
+/**
+ * Verify if a given blockify block is enabled in the blockify admin settings.
+ */
+function _blockify_is_enabled($delta){
+  $blocks = variable_get('blockify_blocks', array());
+  return ($blocks[$delta]);
 }
