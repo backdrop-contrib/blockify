@@ -71,7 +71,6 @@ function blockify_block($op = 'list', $delta = 0, $edit = array()) {
       $blocks['blockify-page-messages-all']['info'] = t('[blockify] Page all messages');
       $blocks['blockify-page-help']['info'] = t('[blockify] Page help');
       $blocks['blockify-page-tabs']['info'] = t('[blockify] Page menu tabs');
-      // $blocks['blockify-node-author']['info'] = t('[blockify] Node-author');
       return $blocks;
 
     case 'view':
@@ -168,17 +167,7 @@ function blockify_get_content($delta) {
       $output = theme('menu_local_tasks');
       // TODO: provide theme function
     break;    
-    
-    // case 'blockify-node-author':
-    //   if ($node = menu_get_object()) {
-    //     $user = user_load($node->uid);
-    //     $output = $user->name;
-    //     dpm($user);
-    //   }
-      
-      // TODO: provide theme function
-      
-    break;    
+  
   }
   return $output;
 }
@@ -203,6 +192,5 @@ function _blockify_get_blocks($enabled_blocks_only = TRUE){
     'messages_warning' => 'blockify-page-messages-warning',
     'messages_status' => 'blockify-page-messages-status',
     'messages_all' => 'blockify-page-messages-all',
-    // 'node_author' => 'blockify-node-author',
   );
 }
