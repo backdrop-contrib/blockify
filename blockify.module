@@ -18,7 +18,6 @@ function blockify_init() {
  * Implementation of hook_help().
  */ 
 function blockify_help($path, $arg) { 
-  
   if ($path == 'admin/help#blockify') { 
     $txt = 'This module exposes theme items (such as $logo), page items (such as $messages) and '. 
       'site info items (such as $site_name and $slogan) as blocks.'; 
@@ -57,27 +56,16 @@ function blockify_block($op = 'list', $delta = 0, $edit = array()) {
   switch ($op) {
 
     case 'list':
-      $blocks['blockify-theme-default-logo']['info'] = t('[blockify] Default logo');
-      $blocks['blockify-theme-custom-logo']['info'] = t('[blockify] Custom logo');
-      $blocks['blockify-siteinfo-name']['info'] = t('[blockify] Site name');
-      $blocks['blockify-siteinfo-slogan']['info'] = t('[blockify] Site slogan');
-      $blocks['blockify-siteinfo-mission']['info'] = t('[blockify] Site mission');
-      $blocks['blockify-siteinfo-footer']['info'] = t('[blockify] Site footer');
-      $blocks['blockify-page-title']['info'] = t('[blockify] Page title');
-      $blocks['blockify-page-breadcrumb']['info'] = t('[blockify] Page breadcrumb');
-      $blocks['blockify-page-messages-error']['info'] = t('[blockify] Page error messages');
-      $blocks['blockify-page-messages-warning']['info'] = t('[blockify] Page warning messages');
-      $blocks['blockify-page-messages-status']['info'] = t('[blockify] Page status messages');
-      $blocks['blockify-page-messages-all']['info'] = t('[blockify] Page all messages');
-      $blocks['blockify-page-help']['info'] = t('[blockify] Page help');
-      $blocks['blockify-page-tabs']['info'] = t('[blockify] Page menu tabs');
+      $block_list = _blockify_get_blocks();
+      foreach($block_list as $block_delta => $block_name){
+        $blocks[$block_delta]['info'] = $block_name;
+      }
       return $blocks;
 
     case 'view':
       $blocks = _blockify_get_blocks();
-      
-      foreach ($blocks as $b => $blockname){
-        if ($delta == $blockname){
+      foreach ($blocks as $block_delta => $block_name){
+        if ($delta == $block_delta){
           $block['subject'] = '';
           $block['content'] = blockify_get_content($delta);          
         }
@@ -178,19 +166,19 @@ function blockify_get_content($delta) {
 function _blockify_get_blocks($enabled_blocks_only = TRUE){
   // TODO: return all blocks or enabled blocks only based on param
   return array(
-    'default_logo' => 'blockify-theme-default-logo',
-    'custom_logo' => 'blockify-theme-custom-logo',
-    'site_name' => 'blockify-siteinfo-name',
-    'site_slogan' => 'blockify-siteinfo-slogan',
-    'site_mission' => 'blockify-siteinfo-mission',
-    'site_footer' => 'blockify-siteinfo-footer',
-    'pagetitle' => 'blockify-page-title',
-    'page_breadcrumb' => 'blockify-page-breadcrumb',
-    'page_help' => 'blockify-page-help',
-    'page_tabs' => 'blockify-page-tabs',    
-    'messages_error' => 'blockify-page-messages-error',
-    'messages_warning' => 'blockify-page-messages-warning',
-    'messages_status' => 'blockify-page-messages-status',
-    'messages_all' => 'blockify-page-messages-all',
+    'blockify-theme-default-logo' => t('[blockify] Default logo'),
+    'blockify-theme-custom-logo' => t('[blockify] Custom logo'),
+    'blockify-siteinfo-name' => t('[blockify] Site name'),
+    'blockify-siteinfo-slogan' => t('[blockify] Site slogan'),
+    'blockify-siteinfo-mission' => t('[blockify] Site mission'),
+    'blockify-siteinfo-footer' => t('[blockify] Site footer'),
+    'blockify-page-title' => t('[blockify] Page title'),
+    'blockify-page-breadcrumb' => t('[blockify] Page breadcrumb'),
+    'blockify-page-tabs' => t('[blockify] Page menu tabs'),
+    'blockify-page-help' => t('[blockify] Page help'),    
+    'blockify-page-messages-error' => t('[blockify] Page error messages'),
+    'blockify-page-messages-warning' => t('[blockify] Page warning messages'),
+    'blockify-page-messages-status' => t('[blockify] Page status messages'),
+    'blockify-page-messages-all' => t('[blockify] Page all messages'),
   );
 }
