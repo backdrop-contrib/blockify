@@ -7,13 +7,6 @@
  include_once './' . drupal_get_path('module', 'blockify') . '/theme/theme.inc';
 
 /**
- * Implementation of hook_init().
- */
-function blockify_init() {
-  drupal_add_css(drupal_get_path('module', 'blockify') .'/css/blockify.css');
-}
-
-/**
  * Implementation of hook_help().
  */
 function blockify_help($path, $arg) {
