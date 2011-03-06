@@ -1,4 +1,3 @@
 name = Blockify
 description = Expose theme items, site information items and more as blocks.
 core = 6.x
-version = 6.x-1.0-dev
