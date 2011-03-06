@@ -19,15 +19,18 @@ function blockify_help($path, $arg) {
  * Implementation of hook_menu()
  */
 function blockify_menu() {
+  $items = array();
+
   $items['admin/settings/blockify'] = array(
-    'title' => t('Blockify settings'),
-    'description' => t('Select which blockify blocks to enable.'),
+    'title' => t('Blockify'),
+    'description' => t('Settings for the Blockify module.'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('blockify_admin_settings'),
     'access arguments' => array('administer blockify'),
     'type' => MENU_NORMAL_ITEM,
     'file' => 'includes/admin.inc',
   );
+
   return $items;
 }
 
