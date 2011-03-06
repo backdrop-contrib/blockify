@@ -10,13 +10,8 @@
  * Implementation of hook_help().
  */
 function blockify_help($path, $arg) {
-
   if ($path == 'admin/help#blockify') {
-    $txt = 'This module exposes theme items (such as $logo), page items (such as $messages) and '.
-      'site info items (such as $site_name and $slogan) as blocks.';
-
-    return '<p>'. t($txt) .'</p>';
-  }
+    return '<p>' . t('This module exposes theme items (such as $logo), page items (such as $messages) and site info items (such as $site_name and $slogan) as blocks.') . '</p>';
 }
 
 /**
