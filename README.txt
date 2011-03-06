@@ -1,5 +1,3 @@
-// $Id;
-
 Blockify
 
 This module exposes a number of core Drupal elements (site slogan, error 

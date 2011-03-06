@@ -1,5 +1,4 @@
 <?php
-// $Id$ 
 /** 
  * @file 
  * Module to expose theme items, site information items and more as blocks.
