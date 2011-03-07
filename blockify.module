@@ -49,8 +49,8 @@ function blockify_block($op = 'list', $delta = 0, $edit = array()) {
 
     case 'list':
       $block_list = _blockify_get_blocks();
-      foreach($block_list as $block_delta => $block_name){
-        if (_blockify_is_enabled($block_delta)){
+      foreach($block_list as $block_delta => $block_name) {
+        if (_blockify_is_enabled($block_delta)) {
           $blocks[$block_delta]['info'] = $block_name;
         }
       }
@@ -58,8 +58,8 @@ function blockify_block($op = 'list', $delta = 0, $edit = array()) {
 
     case 'view':
       $blocks = _blockify_get_blocks();
-      foreach ($blocks as $block_delta => $block_name){
-        if ($delta == $block_delta && _blockify_is_enabled($block_delta)){
+      foreach ($blocks as $block_delta => $block_name) {
+        if ($delta == $block_delta && _blockify_is_enabled($block_delta)) {
           $block['subject'] = '';
           $block['content'] = blockify_get_content($delta);
         }
@@ -167,7 +167,7 @@ function blockify_get_content($delta) {
 /**
  * Provides a list of all (enabled) blockify blocks.
  */
-function _blockify_get_blocks($enabled_blocks_only = TRUE){
+function _blockify_get_blocks($enabled_blocks_only = TRUE) {
   // TODO: return all blocks or enabled blocks only based on param
   return array(
     'blockify-logo-default' => t('Default logo'),
@@ -191,7 +191,7 @@ function _blockify_get_blocks($enabled_blocks_only = TRUE){
 /**
  * Verify if a given blockify block is enabled in the blockify admin settings.
  */
-function _blockify_is_enabled($delta){
+function _blockify_is_enabled($delta) {
   $blocks = variable_get('blockify_blocks', array());
   return ($blocks[$delta]);
 }
