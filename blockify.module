@@ -1,45 +1,37 @@
 <?php
-// $Id$ 
-/** 
- * @file 
+/**
+ * @file
  * Module to expose theme items, site information items and more as blocks.
- */ 
- 
+ */
+
  include_once './' . drupal_get_path('module', 'blockify') . '/theme/theme.inc';
 
 /**
- * Implementation of hook_init().
+ * Implementation of hook_help().
  */
-function blockify_init() {
-  drupal_add_css(drupal_get_path('module', 'blockify') .'/css/blockify.css');
+function blockify_help($path, $arg) {
+  if ($path == 'admin/help#blockify') {
+    return '<p>' . t('This module exposes a number of core Drupal elements as blocks.') . '</p>';
+  }
 }
 
-/** 
- * Implementation of hook_help().
- */ 
-function blockify_help($path, $arg) { 
-  if ($path == 'admin/help#blockify') { 
-    $txt = 'This module exposes theme items (such as $logo), page items (such as $messages) and '. 
-      'site info items (such as $site_name and $slogan) as blocks.'; 
-    
-    return '<p>'. t($txt) .'</p>'; 
-  } 
-} 
+/**
+ * Implementation of hook_menu()
+ */
+function blockify_menu() {
+  $items = array();
 
-/** 
- * Implementation of hook_menu() 
- */ 
-function blockify_menu() {  
-  $items['admin/settings/blockify'] = array( 
-    'title' => t('Blockify settings'), 
-    'description' => t('Select which blockify blocks to enable.'),
+  $items['admin/settings/blockify'] = array(
+    'title' => t('Blockify'),
+    'description' => t('Settings for the Blockify module.'),
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('blockify_admin_settings'), 
+    'page arguments' => array('blockify_admin_settings'),
     'access arguments' => array('administer blockify'),
     'type' => MENU_NORMAL_ITEM,
-    'file' => 'includes/admin.inc', 
-  ); 
-  return $items; 
+    'file' => 'includes/admin.inc',
+  );
+
+  return $items;
 }
 
 /**
@@ -69,11 +61,11 @@ function blockify_block($op = 'list', $delta = 0, $edit = array()) {
       foreach ($blocks as $block_delta => $block_name){
         if ($delta == $block_delta && _blockify_is_enabled($block_delta)){
           $block['subject'] = '';
-          $block['content'] = blockify_get_content($delta);          
+          $block['content'] = blockify_get_content($delta);
         }
       }
       return $block;
-  }    
+  }
 }
 
 /**
@@ -84,80 +76,90 @@ function blockify_get_content($delta) {
   switch ($delta) {
     case 'blockify-theme-default-logo':
       global $theme_key;
-    
+
       //TODO: add static var to avoid needless queries
       $sql = "SELECT filename FROM {system} WHERE `name` = '%s'";
       $filename = db_result(db_query($sql, $theme_key));
       $logo_path = base_path() . dirname($filename) .'/logo.png';
-      $output = theme('blockify_theme_default_logo', check_url($logo_path));  
+      $output = theme('blockify_theme_default_logo', check_url($logo_path));
       break;
-  
+
     case 'blockify-theme-custom-logo':
       global $theme_key;
       $theme_settings = variable_get("theme_" . $theme_key . "_settings", array());
       $logo_path = base_path() . $theme_settings['logo_path'];
-      $output = theme('blockify_theme_default_logo', check_url($logo_path));  
+      $output = theme('blockify_theme_default_logo', check_url($logo_path));
     break;
 
     case 'blockify-siteinfo-name':
       $site_name = filter_xss_admin(variable_get('site_name', 'Drupal'));
       $output = theme('blockify_siteinfo_name', $site_name);
     break;
-    
+
     case 'blockify-siteinfo-slogan':
       $site_slogan = filter_xss_admin(variable_get('site_slogan', ''));
       $output = theme('blockify_siteinfo_slogan', $site_slogan);
-    break;    
-  
+    break;
+
     case 'blockify-siteinfo-mission':
       $site_mission = filter_xss_admin(variable_get('site_mission', ''));
       $output = theme('blockify_siteinfo_mission', $site_mission);
-    break;  
-    
+    break;
+
     case 'blockify-siteinfo-footer':
       $site_footer = filter_xss_admin(variable_get('site_footer', ''));
       $output = theme('blockify_siteinfo_footer', $site_footer);
-    break;    
+    break;
 
     case 'blockify-page-title':
       $output = theme('blockify_page_title', drupal_get_title());
     break;
-    
+
     case 'blockify-page-breadcrumb':
       $breadcrumb = drupal_get_breadcrumb();
       $output = theme('blockify_page_breadcrumb', $breadcrumb);
     break;
-    
+
     case 'blockify-page-messages-error':
       $output = theme('status_messages', 'error');
       // TODO: provide theme function
     break;
-    
+
     case 'blockify-page-messages-warning':
       $output = theme('status_messages', 'warning');
       // TODO: provide theme function
-    break;    
-    
+    break;
+
     case 'blockify-page-messages-status':
       $output = theme('status_messages', 'status');
       // TODO: provide theme function
-    break;    
-    
+    break;
+
     case 'blockify-page-messages-all':
       $output = theme('status_messages');
       // TODO: provide theme function
-    break;    
+    break;
 
     case 'blockify-page-help':
       $output = theme('help');
       // TODO: provide theme function
-    break;    
+    break;
 
     case 'blockify-page-tabs':
       $output = theme('menu_local_tasks');
       // TODO: provide theme function
-    break;    
-  
+    break;
+
+    // case 'blockify-node-author':
+    //   if ($node = menu_get_object()) {
+    //     $user = user_load($node->uid);
+    //     $output = $user->name;
+    //     dpm($user);
+    //   }
+
+      // TODO: provide theme function
+
+    break;
   }
   return $output;
 }
@@ -168,20 +170,21 @@ function blockify_get_content($delta) {
 function _blockify_get_blocks($enabled_blocks_only = TRUE){
   // TODO: return all blocks or enabled blocks only based on param
   return array(
-    'blockify-theme-default-logo' => t('[blockify] Default logo'),
-    'blockify-theme-custom-logo' => t('[blockify] Custom logo'),
-    'blockify-siteinfo-name' => t('[blockify] Site name'),
-    'blockify-siteinfo-slogan' => t('[blockify] Site slogan'),
-    'blockify-siteinfo-mission' => t('[blockify] Site mission'),
-    'blockify-siteinfo-footer' => t('[blockify] Site footer'),
-    'blockify-page-title' => t('[blockify] Page title'),
-    'blockify-page-breadcrumb' => t('[blockify] Page breadcrumb'),
-    'blockify-page-tabs' => t('[blockify] Page menu tabs'),
-    'blockify-page-help' => t('[blockify] Page help'),    
-    'blockify-page-messages-error' => t('[blockify] Page error messages'),
-    'blockify-page-messages-warning' => t('[blockify] Page warning messages'),
-    'blockify-page-messages-status' => t('[blockify] Page status messages'),
-    'blockify-page-messages-all' => t('[blockify] Page all messages'),
+    'default_logo' => 'blockify-theme-default-logo',
+    'custom_logo' => 'blockify-theme-custom-logo',
+    'site_name' => 'blockify-siteinfo-name',
+    'site_slogan' => 'blockify-siteinfo-slogan',
+    'site_mission' => 'blockify-siteinfo-mission',
+    'site_footer' => 'blockify-siteinfo-footer',
+    'pagetitle' => 'blockify-page-title',
+    'page_breadcrumb' => 'blockify-page-breadcrumb',
+    'page_help' => 'blockify-page-help',
+    'page_tabs' => 'blockify-page-tabs',
+    'messages_error' => 'blockify-page-messages-error',
+    'messages_warning' => 'blockify-page-messages-warning',
+    'messages_status' => 'blockify-page-messages-status',
+    'messages_all' => 'blockify-page-messages-all',
+    // 'node_author' => 'blockify-node-author',
   );
 }
 
@@ -192,3 +195,4 @@ function _blockify_is_enabled($delta){
   $blocks = variable_get('blockify_blocks', array());
   return ($blocks[$delta]);
 }
+
