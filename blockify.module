@@ -74,7 +74,7 @@ function blockify_block($op = 'list', $delta = 0, $edit = array()) {
 function blockify_get_content($delta) {
   $output = '';
   switch ($delta) {
-    case 'blockify-theme-default-logo':
+    case 'blockify-logo-default':
       global $theme_key;
 
       //TODO: add static var to avoid needless queries
@@ -84,29 +84,29 @@ function blockify_get_content($delta) {
       $output = theme('blockify_theme_default_logo', check_url($logo_path));
       break;
 
-    case 'blockify-theme-custom-logo':
+    case 'blockify-logo-custom':
       global $theme_key;
       $theme_settings = variable_get("theme_" . $theme_key . "_settings", array());
       $logo_path = base_path() . $theme_settings['logo_path'];
       $output = theme('blockify_theme_default_logo', check_url($logo_path));
     break;
 
-    case 'blockify-siteinfo-name':
+    case 'blockify-site-name':
       $site_name = filter_xss_admin(variable_get('site_name', 'Drupal'));
       $output = theme('blockify_siteinfo_name', $site_name);
     break;
 
-    case 'blockify-siteinfo-slogan':
+    case 'blockify-site-slogan':
       $site_slogan = filter_xss_admin(variable_get('site_slogan', ''));
       $output = theme('blockify_siteinfo_slogan', $site_slogan);
     break;
 
-    case 'blockify-siteinfo-mission':
+    case 'blockify-mission':
       $site_mission = filter_xss_admin(variable_get('site_mission', ''));
       $output = theme('blockify_siteinfo_mission', $site_mission);
     break;
 
-    case 'blockify-siteinfo-footer':
+    case 'blockify-footer-message':
       $site_footer = filter_xss_admin(variable_get('site_footer', ''));
       $output = theme('blockify_siteinfo_footer', $site_footer);
     break;
@@ -115,37 +115,37 @@ function blockify_get_content($delta) {
       $output = theme('blockify_page_title', drupal_get_title());
     break;
 
-    case 'blockify-page-breadcrumb':
+    case 'blockify-breadcrumb':
       $breadcrumb = drupal_get_breadcrumb();
       $output = theme('blockify_page_breadcrumb', $breadcrumb);
     break;
 
-    case 'blockify-page-messages-error':
+    case 'blockify-messages-error':
       $output = theme('status_messages', 'error');
       // TODO: provide theme function
     break;
 
-    case 'blockify-page-messages-warning':
+    case 'blockify-messages-warning':
       $output = theme('status_messages', 'warning');
       // TODO: provide theme function
     break;
 
-    case 'blockify-page-messages-status':
+    case 'blockify-messages-status':
       $output = theme('status_messages', 'status');
       // TODO: provide theme function
     break;
 
-    case 'blockify-page-messages-all':
+    case 'blockify-messages-all':
       $output = theme('status_messages');
       // TODO: provide theme function
     break;
 
-    case 'blockify-page-help':
+    case 'blockify-help':
       $output = theme('help');
       // TODO: provide theme function
     break;
 
-    case 'blockify-page-tabs':
+    case 'blockify-tabs':
       $output = theme('menu_local_tasks');
       // TODO: provide theme function
     break;
@@ -170,21 +170,21 @@ function blockify_get_content($delta) {
 function _blockify_get_blocks($enabled_blocks_only = TRUE){
   // TODO: return all blocks or enabled blocks only based on param
   return array(
-    'default_logo' => 'blockify-theme-default-logo',
-    'custom_logo' => 'blockify-theme-custom-logo',
-    'site_name' => 'blockify-siteinfo-name',
-    'site_slogan' => 'blockify-siteinfo-slogan',
-    'site_mission' => 'blockify-siteinfo-mission',
-    'site_footer' => 'blockify-siteinfo-footer',
-    'pagetitle' => 'blockify-page-title',
-    'page_breadcrumb' => 'blockify-page-breadcrumb',
-    'page_help' => 'blockify-page-help',
-    'page_tabs' => 'blockify-page-tabs',
-    'messages_error' => 'blockify-page-messages-error',
-    'messages_warning' => 'blockify-page-messages-warning',
-    'messages_status' => 'blockify-page-messages-status',
-    'messages_all' => 'blockify-page-messages-all',
-    // 'node_author' => 'blockify-node-author',
+    'blockify-logo-default' => t('Default logo'),
+    'blockify-logo-custom' => t('Custom logo'),
+    'blockify-site-name' => t('Site name'),
+    'blockify-site-slogan' => t('Site slogan'),
+    'blockify-mission' => t('Mission'),
+    'blockify-footer-message' => t('Footer message'),
+    'blockify-page-title' => t('Page title'),
+    'blockify-breadcrumb' => t('Breadcrumb'),
+    'blockify-help' => t('Help'),
+    'blockify-tabs' => t('Tabs'),
+    'blockify-messages-error' => t('Messages (error)'),
+    'blockify-messages-warning' => t('Messages (warning)'),
+    'blockify-messages-status' => t('Messages (status)'),
+    'blockify-messages-all' => t('Messages (all)'),
+    // 'blockify-node-author' => t('Node author'),
   );
 }
 
