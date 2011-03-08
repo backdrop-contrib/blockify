@@ -1,27 +1,28 @@
 <?php
 
 /**
- * Returns the rendered default logo.
+ * Returns the rendered logo.
  *
  * @ingroup themeable
  */
-function theme_blockify_default_logo($logo_path) {
-  $img = '<img src="'. $logo_path .'" id="blockify-theme-default-logo" />';
-  $output = l($img, '<front>', array('html' => TRUE,
-      'attributes' => array('id' => 'logo', 'rel' => 'home')));
-  return $output;
-}
+function theme_blockify_logo($logo_path) {
+  $site_name = filter_xss_admin(variable_get('site_name', 'Drupal'));
+  $path = preg_replace('|^' . base_path() . '|', '', $logo_path);
 
-/**
- * Returns the rendered custom logo.
- *
- * @ingroup themeable
- */
-function theme_blockify_custom_logo($logo_path) {
-  $img = '<img src="'. $logo_path .'" id="blockify-theme-custom-logo" />';
-  $output = l($img, '<front>', array('html' => TRUE,
-      'attributes' => array('id' => 'logo', 'rel' => 'home')));
-  return $output;
+  $image = theme('image', $path, t('!site_name logo', array(
+    '!site_name' => $site_name,
+  )));
+
+  return l($image, '<front>', array(
+    'html' => TRUE,
+    'attributes' => array(
+      'id' => 'logo',
+      'rel' => 'home',
+      'title' => t('Return to the !site_name home page', array(
+        '!site_name' => $site_name,
+      )),
+    ),
+  ));
 }
 
 /**
