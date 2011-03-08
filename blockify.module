@@ -4,8 +4,6 @@
  * Module to expose theme items, site information items and more as blocks.
  */
 
-include_once './' . drupal_get_path('module', 'blockify') . '/theme/theme.inc';
-
 /**
  * Implementation of hook_help().
  */
@@ -28,7 +26,7 @@ function blockify_menu() {
     'page arguments' => array('blockify_admin_settings'),
     'access arguments' => array('administer blockify'),
     'type' => MENU_NORMAL_ITEM,
-    'file' => 'includes/admin.inc',
+    'file' => 'admin.inc',
   );
 
   return $items;
@@ -194,4 +192,44 @@ function _blockify_get_blocks($enabled_blocks_only = TRUE) {
 function _blockify_is_enabled($delta) {
   $blocks = variable_get('blockify_blocks', array());
   return $blocks[$delta];
+}
+
+/**
+ * Implementation of hook_theme().
+ */
+function blockify_theme() {
+  return array(
+    'blockify_theme_default_logo' => array(
+      'arguments' => array('logo_path' => NULL),
+      'file' => 'theme.inc',
+    ),
+    'blockify_theme_custom_logo' => array(
+      'arguments' => array('logo_path' => NULL),
+      'file' => 'theme.inc',
+    ),
+    'blockify_siteinfo_name' => array(
+      'arguments' => array('site_name' => NULL),
+      'file' => 'theme.inc',
+    ),
+    'blockify_siteinfo_slogan' => array(
+      'arguments' => array('site_slogan' => NULL),
+      'file' => 'theme.inc',
+    ),
+    'blockify_siteinfo_mission' => array(
+      'arguments' => array('site_mission' => NULL),
+      'file' => 'theme.inc',
+    ),
+    'blockify_siteinfo_footer' => array(
+      'arguments' => array('site_footer' => NULL),
+      'file' => 'theme.inc',
+    ),
+    'blockify_page_title' => array(
+      'arguments' => array('page_title' => NULL),
+      'file' => 'theme.inc',
+     ),
+    'blockify_page_breadcrumb' => array(
+      'arguments' => array('page_breadcrumb' => NULL),
+      'file' => 'theme.inc',
+    ),
+  );
 }

@@ -1,42 +1,4 @@
 <?php
-/**
- * Implementation of hook_theme().
- */
-function blockify_theme() {
-  return array(
-    'blockify_theme_default_logo' => array(
-      'arguments' => array('logo_path' => NULL),
-    ),
-
-    'blockify_theme_custom_logo' => array(
-      'arguments' => array('logo_path' => NULL),
-    ),
-
-    'blockify_siteinfo_name' => array(
-      'arguments' => array('site_name' => NULL),
-    ),
-
-    'blockify_siteinfo_slogan' => array(
-      'arguments' => array('site_slogan' => NULL),
-    ),
-
-    'blockify_siteinfo_mission' => array(
-      'arguments' => array('site_mission' => NULL),
-    ),
-
-    'blockify_siteinfo_footer' => array(
-      'arguments' => array('site_footer' => NULL),
-    ),
-
-    'blockify_page_title' => array(
-      'arguments' => array('page_title' => NULL),
-     ),
-
-     'blockify_page_breadcrumb' => array(
-       'arguments' => array('page_breadcrumb' => NULL),
-      ),
-  );
-}
 
 /**
  * Themeable function for the default logo block.
