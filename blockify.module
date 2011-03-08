@@ -4,7 +4,7 @@
  * Module to expose theme items, site information items and more as blocks.
  */
 
- include_once './' . drupal_get_path('module', 'blockify') . '/theme/theme.inc';
+include_once './' . drupal_get_path('module', 'blockify') . '/theme/theme.inc';
 
 /**
  * Implementation of hook_help().
@@ -80,13 +80,13 @@ function blockify_get_content($delta) {
       //TODO: add static var to avoid needless queries
       $sql = "SELECT filename FROM {system} WHERE `name` = '%s'";
       $filename = db_result(db_query($sql, $theme_key));
-      $logo_path = base_path() . dirname($filename) .'/logo.png';
+      $logo_path = base_path() . dirname($filename) . '/logo.png';
       $output = theme('blockify_theme_default_logo', check_url($logo_path));
       break;
 
     case 'blockify-logo-custom':
       global $theme_key;
-      $theme_settings = variable_get("theme_" . $theme_key . "_settings", array());
+      $theme_settings = variable_get('theme_' . $theme_key . '_settings', array());
       $logo_path = base_path() . $theme_settings['logo_path'];
       $output = theme('blockify_theme_default_logo', check_url($logo_path));
     break;
@@ -193,6 +193,5 @@ function _blockify_get_blocks($enabled_blocks_only = TRUE) {
  */
 function _blockify_is_enabled($delta) {
   $blocks = variable_get('blockify_blocks', array());
-  return ($blocks[$delta]);
+  return $blocks[$delta];
 }
-
