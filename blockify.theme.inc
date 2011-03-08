@@ -5,7 +5,7 @@
  *
  * @ingroup themeable
  */
-function theme_blockify_theme_default_logo($logo_path) {
+function theme_blockify_default_logo($logo_path) {
   $img = '<img src="'. $logo_path .'" id="blockify-theme-default-logo" />';
   $output = l($img, '<front>', array('html' => TRUE,
       'attributes' => array('id' => 'logo', 'rel' => 'home')));
@@ -17,7 +17,7 @@ function theme_blockify_theme_default_logo($logo_path) {
  *
  * @ingroup themeable
  */
-function theme_blockify_theme_custom_logo($logo_path) {
+function theme_blockify_custom_logo($logo_path) {
   $img = '<img src="'. $logo_path .'" id="blockify-theme-custom-logo" />';
   $output = l($img, '<front>', array('html' => TRUE,
       'attributes' => array('id' => 'logo', 'rel' => 'home')));
@@ -29,7 +29,7 @@ function theme_blockify_theme_custom_logo($logo_path) {
  *
  * @ingroup themeable
  */
-function theme_blockify_siteinfo_name($site_name) {
+function theme_blockify_site_name($site_name) {
   return $site_name;
 }
 
@@ -38,7 +38,7 @@ function theme_blockify_siteinfo_name($site_name) {
  *
  * @ingroup themeable
  */
-function theme_blockify_siteinfo_slogan($site_slogan) {
+function theme_blockify_site_slogan($site_slogan) {
   return $site_slogan;
 }
 
@@ -47,7 +47,7 @@ function theme_blockify_siteinfo_slogan($site_slogan) {
  *
  * @ingroup themeable
  */
-function theme_blockify_siteinfo_mission($site_mission) {
+function theme_blockify_mission($site_mission) {
   return $site_mission;
 }
 
@@ -56,7 +56,7 @@ function theme_blockify_siteinfo_mission($site_mission) {
  *
  * @ingroup themeable
  */
-function theme_blockify_siteinfo_footer($site_footer) {
+function theme_blockify_footer_message($site_footer) {
   return $site_footer;
 }
 
@@ -74,6 +74,6 @@ function theme_blockify_page_title($page_title) {
  *
  * @ingroup themeable
  */
-function theme_blockify_page_breadcrumb($page_breadcrumb) {
+function theme_blockify_breadcrumb($page_breadcrumb) {
   return theme('breadcrumb', $page_breadcrumb);
 }
