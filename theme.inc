@@ -1,8 +1,9 @@
 <?php
 
 /**
- * Themeable function for the default logo block.
- * TODO: use drupal_attributes()
+ * Returns the rendered default logo.
+ *
+ * @ingroup themeable
  */
 function theme_blockify_theme_default_logo($logo_path) {
   $img = '<img src="'. $logo_path .'" id="blockify-theme-default-logo" />';
@@ -12,8 +13,9 @@ function theme_blockify_theme_default_logo($logo_path) {
 }
 
 /**
- * Themeable function for the custom logo block.
- * TODO: use drupal_attributes()
+ * Returns the rendered custom logo.
+ *
+ * @ingroup themeable
  */
 function theme_blockify_theme_custom_logo($logo_path) {
   $img = '<img src="'. $logo_path .'" id="blockify-theme-custom-logo" />';
@@ -23,42 +25,54 @@ function theme_blockify_theme_custom_logo($logo_path) {
 }
 
 /**
- * Themeable function for the site name block.
+ * Returns the rendered site name.
+ *
+ * @ingroup themeable
  */
 function theme_blockify_siteinfo_name($site_name) {
   return $site_name;
 }
 
 /**
- * Themeable function for the site slogan block.
+ * Returns the rendered site slogan.
+ *
+ * @ingroup themeable
  */
 function theme_blockify_siteinfo_slogan($site_slogan) {
   return $site_slogan;
 }
 
 /**
- * Themeable function for the site mission block.
+ * Returns the rendered mission.
+ *
+ * @ingroup themeable
  */
 function theme_blockify_siteinfo_mission($site_mission) {
   return $site_mission;
 }
 
 /**
- * Themeable function for the site footer block.
+ * Returns the rendered footer message.
+ *
+ * @ingroup themeable
  */
 function theme_blockify_siteinfo_footer($site_footer) {
   return $site_footer;
 }
 
 /**
- * Themeable function for the page title block.
+ * Returns the rendered page title.
+ *
+ * @ingroup themeable
  */
 function theme_blockify_page_title($page_title) {
   return '<h2>' . $page_title . '</h2>';
 }
 
 /**
- * Themeable function for the page breadcrumb block.
+ * Returns the rendered breadcrumb.
+ *
+ * @ingroup themeable
  */
 function theme_blockify_page_breadcrumb($page_breadcrumb) {
   return theme('breadcrumb', $page_breadcrumb);

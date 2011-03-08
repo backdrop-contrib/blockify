@@ -1,11 +1,11 @@
 <?php
 /**
  * @file
- * Module to expose theme items, site information items and more as blocks.
+ * Exposes a number of core Drupal elements as blocks.
  */
 
 /**
- * Implementation of hook_help().
+ * Implements hook_help().
  */
 function blockify_help($path, $arg) {
   if ($path == 'admin/help#blockify') {
@@ -14,7 +14,7 @@ function blockify_help($path, $arg) {
 }
 
 /**
- * Implementation of hook_menu()
+ * Implements hook_menu()
  */
 function blockify_menu() {
   $items = array();
@@ -33,14 +33,14 @@ function blockify_menu() {
 }
 
 /**
- * Implementation of hook_perm().
+ * Implements hook_perm().
  */
 function blockify_perm() {
   return array('administer blockify');
 }
 
 /**
- * Implementation of hook_block().
+ * Implements hook_block().
  */
 function blockify_block($op = 'list', $delta = 0, $edit = array()) {
   switch ($op) {
@@ -195,7 +195,7 @@ function _blockify_is_enabled($delta) {
 }
 
 /**
- * Implementation of hook_theme().
+ * Implements hook_theme().
  */
 function blockify_theme() {
   return array(
