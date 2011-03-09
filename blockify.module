@@ -33,10 +33,15 @@ function blockify_menu() {
 }
 
 /**
- * Implements hook_perm().
+ * Implements hook_permission().
  */
-function blockify_perm() {
-  return array('administer blockify');
+function blockify_permission() {
+  return array(
+    'administer blockify' => array(
+      'title' => t('Administer Blockify'),
+      'description' => t('Manage settings for Blockify module'),
+    ),
+  );
 }
 
 /**
