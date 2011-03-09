@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * Theme functions for the Blockify module.
+ */
 
 /**
  * Returns the rendered logo.
