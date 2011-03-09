@@ -5,17 +5,17 @@ This module exposes a number of core Drupal elements as blocks.
 
 The currently supported elements are:
 
-* Default logo
-* Custom logo
+* Logo
 * Site name
 * Site slogan
-* Site mission
-* Site footer
+* Mission
+* Footer message
 * Page title
-* Page breadcrumb
-* Page help
-* Page tabs
-* Messages error
-* Messages warning
-* Messages status
-* Messages all
+* Breadcrumb
+* Help
+* Tabs
+* Messages (errors)
+* Messages (warning)
+* Messages (status)
+* Messages (all)
+* Node (includes node and author objects)
