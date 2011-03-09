@@ -9,17 +9,21 @@
  *
  * @ingroup themeable
  */
-function theme_blockify_logo($logo_path) {
+function theme_blockify_logo($variables) {
   $site_name = filter_xss_admin(variable_get('site_name', 'Drupal'));
 
   // Strip the base_path from the beginning of the logo path.
-  $path = preg_replace('|^' . base_path() . '|', '', $logo_path);
+  $path = preg_replace('|^' . base_path() . '|', '', $variables['logo_path']);
 
-  $image = theme('image', $path, t('!site_name logo', array(
-    '!site_name' => $site_name,
-  )));
+  $image = array(
+    '#theme' => 'image',
+    '#path' => $path,
+    '#alt' => t('!site_name logo', array(
+      '!site_name' => $site_name,
+    ))
+  );
 
-  return l($image, '<front>', array(
+  return l(render($image), '<front>', array(
     'html' => TRUE,
     'attributes' => array(
       'id' => 'logo',
@@ -36,13 +40,13 @@ function theme_blockify_logo($logo_path) {
  *
  * @ingroup themeable
  */
-function theme_blockify_site_name($site_name) {
+function theme_blockify_site_name($variables) {
   $title = drupal_get_title();
 
   // If there is no page title set for this page, use an h1 for the site name.
   $tag = ($title !== '') ? 'span' : 'h1';
 
-  return '<' . $tag . ' class="site-name">' . $site_name . '</' . $tag . '>';
+  return '<' . $tag . ' class="site-name">' . $variables['site_name'] . '</' . $tag . '>';
 }
 
 /**
@@ -50,8 +54,8 @@ function theme_blockify_site_name($site_name) {
  *
  * @ingroup themeable
  */
-function theme_blockify_site_slogan($site_slogan) {
-  return '<span class="site-slogan">' . $site_slogan . '</span>';
+function theme_blockify_site_slogan($variables) {
+  return '<span class="site-slogan">' . $variables['site_slogan'] . '</span>';
 }
 
 /**
@@ -59,8 +63,8 @@ function theme_blockify_site_slogan($site_slogan) {
  *
  * @ingroup themeable
  */
-function theme_blockify_mission($site_mission) {
-  return '<span class="mission">' . $site_mission . '</span>';
+function theme_blockify_mission($variables) {
+  return '<span class="mission">' . $variables['site_mission'] . '</span>';
 }
 
 /**
@@ -68,8 +72,8 @@ function theme_blockify_mission($site_mission) {
  *
  * @ingroup themeable
  */
-function theme_blockify_footer_message($site_footer) {
-  return '<span class="footer-message">' . $site_footer . '</span>';
+function theme_blockify_footer_message($variables) {
+  return '<span class="footer-message">' . $variables['site_footer'] . '</span>';
 }
 
 /**
@@ -77,9 +81,9 @@ function theme_blockify_footer_message($site_footer) {
  *
  * @ingroup themeable
  */
-function theme_blockify_page_title($page_title) {
-  if ($page_title !== '') {
-    return '<h1>' . $page_title . '</h1>';
+function theme_blockify_page_title($variables) {
+  if ($variables['page_title'] !== '') {
+    return '<h1>' . $variables['page_title'] . '</h1>';
   }
 }
 
@@ -88,22 +92,6 @@ function theme_blockify_page_title($page_title) {
  *
  * @ingroup themeable
  */
-function theme_blockify_breadcrumb($page_breadcrumb) {
-  return theme('breadcrumb', $page_breadcrumb);
-}
-
-/**
- * Returns the rendered node details.
- *
- * This block can be used to render details for the current node and author
- * object outside of the node container.
- *
- * @ingroup themeable
- */
-function theme_blockify_node($user, $node) {
-  $items = array(
-    'username' => theme('username', $user),
-    'submitted' => theme('node_submitted', $node),
-  );
-  return theme('item_list', $items, t('Node details'));
+function theme_blockify_breadcrumb($variables) {
+  return theme('breadcrumb', $variables);
 }
