@@ -113,9 +113,6 @@ function blockify_get_content($delta) {
     case 'blockify-messages-all':
       return theme('status_messages');
 
-    case 'blockify-help':
-      return theme('help');
-
     case 'blockify-tabs':
       return theme('menu_local_tasks');
 
@@ -140,7 +137,6 @@ function _blockify_get_blocks($enabled_blocks_only = TRUE) {
     'blockify-footer-message' => t('Footer message'),
     'blockify-page-title' => t('Page title'),
     'blockify-breadcrumb' => t('Breadcrumb'),
-    'blockify-help' => t('Help'),
     'blockify-tabs' => t('Tabs'),
     'blockify-messages-error' => t('Messages (error)'),
     'blockify-messages-warning' => t('Messages (warning)'),
