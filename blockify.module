@@ -19,7 +19,7 @@ function blockify_help($path, $arg) {
 function blockify_menu() {
   $items = array();
 
-  $items['admin/settings/blockify'] = array(
+  $items['admin/structure/block/blockify'] = array(
     'title' => 'Blockify',
     'description' => 'Settings for the Blockify module.',
     'page callback' => 'drupal_get_form',
@@ -45,30 +45,30 @@ function blockify_permission() {
 }
 
 /**
- * Implements hook_block().
+ * Implements hook_block_info().
  */
-function blockify_block($op = 'list', $delta = 0, $edit = array()) {
-  switch ($op) {
-
-    case 'list':
-      $block_list = _blockify_get_blocks();
-      foreach ($block_list as $block_delta => $block_name) {
-        if (_blockify_is_enabled($block_delta)) {
-          $blocks[$block_delta]['info'] = $block_name;
-        }
-      }
-      return $blocks;
-
-    case 'view':
-      $blocks = _blockify_get_blocks();
-      foreach ($blocks as $block_delta => $block_name) {
-        if ($delta == $block_delta && _blockify_is_enabled($block_delta)) {
-          $block['subject'] = '';
-          $block['content'] = blockify_get_content($delta);
-        }
-      }
-      return $block;
+function blockify_block_info() {
+  $block_list = _blockify_get_blocks();
+  foreach ($block_list as $block_delta => $block_name) {
+    if (_blockify_is_enabled($block_delta)) {
+      $blocks[$block_delta]['info'] = $block_name;
+    }
   }
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function blockify_block_view($delta = '') {
+  $blocks = _blockify_get_blocks();
+  foreach ($blocks as $block_delta => $block_name) {
+    if ($delta == $block_delta && _blockify_is_enabled($block_delta)) {
+      $block['subject'] = '';
+      $block['content'] = blockify_get_content($delta);
+    }
+  }
+  return $block;
 }
 
 /**
