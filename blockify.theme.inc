@@ -31,7 +31,12 @@ function theme_blockify_logo($logo_path) {
  * @ingroup themeable
  */
 function theme_blockify_site_name($site_name) {
-  return $site_name;
+  $title = drupal_get_title();
+
+  // If there is no page title set for this page, use an h1 for the site name.
+  $tag = ($title !== '') ? 'span' : 'h1';
+
+  return '<' . $tag . ' class="site-name">' . $site_name . '</' . $tag . '>';
 }
 
 /**
@@ -40,7 +45,7 @@ function theme_blockify_site_name($site_name) {
  * @ingroup themeable
  */
 function theme_blockify_site_slogan($site_slogan) {
-  return $site_slogan;
+  return '<span class="site-slogan">' . $site_slogan . '</span>';
 }
 
 /**
@@ -49,7 +54,7 @@ function theme_blockify_site_slogan($site_slogan) {
  * @ingroup themeable
  */
 function theme_blockify_mission($site_mission) {
-  return $site_mission;
+  return '<span class="mission">' . $site_mission . '</span>';
 }
 
 /**
@@ -58,7 +63,7 @@ function theme_blockify_mission($site_mission) {
  * @ingroup themeable
  */
 function theme_blockify_footer_message($site_footer) {
-  return $site_footer;
+  return '<span class="footer-message">' . $site_footer . '</span>';
 }
 
 /**
@@ -67,7 +72,9 @@ function theme_blockify_footer_message($site_footer) {
  * @ingroup themeable
  */
 function theme_blockify_page_title($page_title) {
-  return '<h2>' . $page_title . '</h2>';
+  if ($page_title !== '') {
+    return '<h1>' . $page_title . '</h1>';
+  }
 }
 
 /**
