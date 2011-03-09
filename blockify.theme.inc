@@ -85,3 +85,16 @@ function theme_blockify_page_title($page_title) {
 function theme_blockify_breadcrumb($page_breadcrumb) {
   return theme('breadcrumb', $page_breadcrumb);
 }
+
+/**
+ * Returns the rendered breadcrumb.
+ *
+ * @ingroup themeable
+ */
+function theme_blockify_node($user, $node) {
+  $items = array(
+    'username' => theme('username', $user),
+    'submitted' => theme('node_submitted', $node),
+  );
+  return theme('item_list', $items, t('Node details'));
+}

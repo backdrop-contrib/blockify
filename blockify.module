@@ -77,62 +77,49 @@ function blockify_get_content($delta) {
     case 'blockify-site-name':
       $site_name = filter_xss_admin(variable_get('site_name', 'Drupal'));
       return theme('blockify_site_name', $site_name);
-    break;
 
     case 'blockify-site-slogan':
       $site_slogan = filter_xss_admin(variable_get('site_slogan', ''));
       return theme('blockify_site_slogan', $site_slogan);
-    break;
 
     case 'blockify-mission':
       $site_mission = filter_xss_admin(variable_get('site_mission', ''));
       return theme('blockify_mission', $site_mission);
-    break;
 
     case 'blockify-footer-message':
       $site_footer = filter_xss_admin(variable_get('site_footer', ''));
       return theme('blockify_footer_message', $site_footer);
-    break;
 
     case 'blockify-page-title':
       return theme('blockify_page_title', drupal_get_title());
-    break;
 
     case 'blockify-breadcrumb':
       $breadcrumb = drupal_get_breadcrumb();
       return theme('blockify_breadcrumb', $breadcrumb);
-    break;
 
     case 'blockify-messages-error':
       return theme('status_messages', 'error');
-    break;
 
     case 'blockify-messages-warning':
       return theme('status_messages', 'warning');
-    break;
 
     case 'blockify-messages-status':
       return theme('status_messages', 'status');
-    break;
 
     case 'blockify-messages-all':
       return theme('status_messages');
-    break;
 
     case 'blockify-help':
       return theme('help');
-    break;
 
     case 'blockify-tabs':
       return theme('menu_local_tasks');
-    break;
-    // case 'blockify-node-author':
-    //   if ($node = menu_get_object()) {
-    //     $user = user_load($node->uid);
-    //     $output = $user->name;
-    //     dpm($user);
-    //   }
-    break;
+
+    case 'blockify-node':
+      if ($node = menu_get_object()) {
+        $user = user_load($node->uid);
+        return theme('blockify_node', $user, $node);
+      }
   }
 }
 
@@ -155,7 +142,7 @@ function _blockify_get_blocks($enabled_blocks_only = TRUE) {
     'blockify-messages-warning' => t('Messages (warning)'),
     'blockify-messages-status' => t('Messages (status)'),
     'blockify-messages-all' => t('Messages (all)'),
-    // 'blockify-node-author' => t('Node author'),
+    'blockify-node' => t('Node'),
   );
 }
 
@@ -198,6 +185,10 @@ function blockify_theme() {
      ),
     'blockify_breadcrumb' => array(
       'arguments' => array('page_breadcrumb' => NULL),
+      'file' => 'blockify.theme.inc',
+    ),
+    'blockify_node' => array(
+      'arguments' => array('user' => NULL, 'node' => NULL),
       'file' => 'blockify.theme.inc',
     ),
   );
