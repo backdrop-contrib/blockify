@@ -87,7 +87,10 @@ function theme_blockify_breadcrumb($page_breadcrumb) {
 }
 
 /**
- * Returns the rendered breadcrumb.
+ * Returns the rendered node details.
+ *
+ * This block can be used to render details for the current node and author
+ * object outside of the node container.
  *
  * @ingroup themeable
  */
