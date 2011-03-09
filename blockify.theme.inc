@@ -7,6 +7,8 @@
  */
 function theme_blockify_logo($logo_path) {
   $site_name = filter_xss_admin(variable_get('site_name', 'Drupal'));
+
+  // Strip the base_path from the beginning of the logo path.
   $path = preg_replace('|^' . base_path() . '|', '', $logo_path);
 
   $image = theme('image', $path, t('!site_name logo', array(
