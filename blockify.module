@@ -105,32 +105,26 @@ function blockify_get_content($delta) {
 
     case 'blockify-messages-error':
       return theme('status_messages', 'error');
-      // TODO: provide theme function
     break;
 
     case 'blockify-messages-warning':
       return theme('status_messages', 'warning');
-      // TODO: provide theme function
     break;
 
     case 'blockify-messages-status':
       return theme('status_messages', 'status');
-      // TODO: provide theme function
     break;
 
     case 'blockify-messages-all':
       return theme('status_messages');
-      // TODO: provide theme function
     break;
 
     case 'blockify-help':
       return theme('help');
-      // TODO: provide theme function
     break;
 
     case 'blockify-tabs':
       return theme('menu_local_tasks');
-      // TODO: provide theme function
     break;
     // case 'blockify-node-author':
     //   if ($node = menu_get_object()) {
@@ -138,8 +132,6 @@ function blockify_get_content($delta) {
     //     $output = $user->name;
     //     dpm($user);
     //   }
-
-      // TODO: provide theme function
     break;
   }
 }

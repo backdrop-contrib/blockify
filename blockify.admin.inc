@@ -8,6 +8,8 @@
  * Blockify administration form.
  */
 function blockify_admin_settings() {
+  $form = array();
+
   $form['blockify_blocks'] = array(
     '#type' => 'checkboxes',
     '#title' => t('Make the following blocks available'),
