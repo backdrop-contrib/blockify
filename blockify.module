@@ -94,8 +94,7 @@ function blockify_get_content($delta) {
       return theme('blockify_page_title', drupal_get_title());
 
     case 'blockify-breadcrumb':
-      $breadcrumb = drupal_get_breadcrumb();
-      return theme('blockify_breadcrumb', $breadcrumb);
+      return theme('blockify_breadcrumb', drupal_get_breadcrumb());
 
     case 'blockify-messages-error':
       return theme('status_messages', 'error');
