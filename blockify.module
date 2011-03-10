@@ -51,7 +51,10 @@ function blockify_block_info() {
   $block_list = _blockify_get_blocks();
   foreach ($block_list as $block_delta => $block_name) {
     if (_blockify_is_enabled($block_delta)) {
-      $blocks[$block_delta]['info'] = $block_name;
+      $blocks[$block_delta] = array(
+        'info' => $block_name,
+        'cache' => BLOCK_CACHE_ALL,
+      );
     }
   }
   return $blocks;
