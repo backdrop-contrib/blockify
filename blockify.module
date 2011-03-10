@@ -109,10 +109,9 @@ function blockify_get_content($delta) {
 }
 
 /**
- * Provides a list of all (enabled) blockify blocks.
+ * Returns a list of blockify blocks.
  */
 function _blockify_get_blocks($enabled_blocks_only = TRUE) {
-  // TODO: return all blocks or enabled blocks only based on param
   return array(
     'blockify-logo' => t('Logo'),
     'blockify-site-name' => t('Site name'),
