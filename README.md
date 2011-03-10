@@ -11,6 +11,8 @@ This module exposes a number of core Drupal elements as blocks.
 * Breadcrumb
 * Tabs
 * Messages
+* Local actions
+* Feed icons
 
 The module provides an administrations settings page to enable/disable blockify blocks installation-wide.
 
