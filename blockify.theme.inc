@@ -59,15 +59,6 @@ function theme_blockify_site_slogan($variables) {
 }
 
 /**
- * Returns the rendered footer message.
- *
- * @ingroup themeable
- */
-function theme_blockify_footer_message($variables) {
-  return '<span class="footer-message">' . $variables['site_footer'] . '</span>';
-}
-
-/**
  * Returns the rendered page title.
  *
  * @ingroup themeable
