@@ -111,6 +111,9 @@ function blockify_get_content($delta) {
     case 'blockify-actions':
       $variables['menu_local_actions'] = menu_local_actions();
       return theme('blockify_local_actions', $variables);
+    case 'blockify-feed-icons':
+      $variables['feed_icons'] = drupal_get_feeds();
+      return theme('blockify_feed_icons', $variables);
   }
 }
 
@@ -127,6 +130,7 @@ function _blockify_get_blocks($enabled_blocks_only = TRUE) {
     'blockify-tabs' => t('Tabs'),
     'blockify-messages' => t('Messages'),
     'blockify-actions' => t('Actions'),
+    'blockify-feed-icons' => t('Feed icons'),
   );
 }
 
@@ -165,6 +169,10 @@ function blockify_theme() {
     ),
     'blockify_local_actions' => array(
       'variables' => array('menu_local_actions' => NULL),
+      'file' => 'blockify.theme.inc',
+    ),
+    'blockify_feed_icons' => array(
+      'variables' => array('feed_icons' => NULL),
       'file' => 'blockify.theme.inc',
     ),
   );

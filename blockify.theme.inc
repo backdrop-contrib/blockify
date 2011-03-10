@@ -104,3 +104,12 @@ function theme_blockify_breadcrumb($variables) {
 function theme_blockify_local_actions($variables) {
   return '<ul class="action-links">' . render($variables['menu_local_actions']) . '</ul>';
 }
+
+/**
+ * Returns the rendered feed icons.
+ *
+ * @ingroup themeable
+ */
+function theme_blockify_feed_icons($variables) {
+  return $variables['feed_icons'];
+}
