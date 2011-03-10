@@ -53,7 +53,7 @@ function blockify_block_info() {
     if (_blockify_is_enabled($block_delta)) {
       $blocks[$block_delta] = array(
         'info' => $block_name,
-        'cache' => BLOCK_CACHE_ALL,
+        'cache' => DRUPAL_CACHE_GLOBAL,
       );
     }
   }
