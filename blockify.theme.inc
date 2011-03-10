@@ -59,15 +59,6 @@ function theme_blockify_site_slogan($variables) {
 }
 
 /**
- * Returns the rendered mission.
- *
- * @ingroup themeable
- */
-function theme_blockify_mission($variables) {
-  return '<span class="mission">' . $variables['site_mission'] . '</span>';
-}
-
-/**
  * Returns the rendered footer message.
  *
  * @ingroup themeable

@@ -89,10 +89,6 @@ function blockify_get_content($delta) {
       $variables['site_slogan'] = filter_xss_admin(variable_get('site_slogan', ''));
       return theme('blockify_site_slogan', $variables);
 
-    case 'blockify-mission':
-      $variables['site_mission'] = filter_xss_admin(variable_get('site_mission', ''));
-      return theme('blockify_mission', $variables);
-
     case 'blockify-footer-message':
       $variables['site_footer'] = filter_xss_admin(variable_get('site_footer', ''));
       return theme('blockify_footer_message', $variables);
@@ -122,7 +118,6 @@ function _blockify_get_blocks($enabled_blocks_only = TRUE) {
     'blockify-logo' => t('Logo'),
     'blockify-site-name' => t('Site name'),
     'blockify-site-slogan' => t('Site slogan'),
-    'blockify-mission' => t('Mission'),
     'blockify-footer-message' => t('Footer message'),
     'blockify-page-title' => t('Page title'),
     'blockify-breadcrumb' => t('Breadcrumb'),
@@ -154,10 +149,6 @@ function blockify_theme() {
     ),
     'blockify_site_slogan' => array(
       'variables' => array('site_slogan' => NULL),
-      'file' => 'blockify.theme.inc',
-    ),
-    'blockify_mission' => array(
-      'variables' => array('site_mission' => NULL),
       'file' => 'blockify.theme.inc',
     ),
     'blockify_footer_message' => array(
