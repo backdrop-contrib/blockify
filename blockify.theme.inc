@@ -42,11 +42,29 @@ function theme_blockify_logo($variables) {
  */
 function theme_blockify_site_name($variables) {
   $title = drupal_get_title();
+  $site_name = $variables['site_name'];
 
   // If there is no page title set for this page, use an h1 for the site name.
   $tag = ($title !== '') ? 'span' : 'h1';
 
-  return '<' . $tag . ' class="site-name">' . $variables['site_name'] . '</' . $tag . '>';
+  $link = array(
+    '#theme' => 'link',
+    '#path' => '<front>',
+    '#text' => '<span>' . $site_name . '</span>',
+    '#prefix' => '<' . $tag . ' id="site-name">',
+    '#suffix' => '</' . $tag . '>',
+    '#options' => array(
+      'attributes' => array(
+        'title' => t('Return to the !site_name home page', array(
+          '!site_name' => $site_name,
+        )),
+        'rel' => 'home',
+      ),
+      'html' => TRUE,
+    ),
+  );
+
+  return render($link);
 }
 
 /**
