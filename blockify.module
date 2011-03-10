@@ -117,7 +117,7 @@ function _blockify_get_blocks($enabled_blocks_only = TRUE) {
     'blockify-page-title' => t('Page title'),
     'blockify-breadcrumb' => t('Breadcrumb'),
     'blockify-tabs' => t('Tabs'),
-    'blockify-messages' => t('Messages (all)'),
+    'blockify-messages' => t('Messages'),
   );
 }
 
