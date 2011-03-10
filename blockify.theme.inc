@@ -95,3 +95,12 @@ function theme_blockify_page_title($variables) {
 function theme_blockify_breadcrumb($variables) {
   return theme('breadcrumb', $variables);
 }
+
+/**
+ * Returns the rendered action items.
+ *
+ * @ingroup themeable
+ */
+function theme_blockify_local_actions($variables) {
+  return '<ul class="action-links">' . render($variables['menu_local_actions']) . '</ul>';
+}
