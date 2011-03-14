@@ -57,6 +57,9 @@ function blockify_block_info() {
       );
     }
   }
+  if (!$blocks) {
+    $blocks = array();
+  }
   return $blocks;
 }
 
