@@ -83,7 +83,13 @@ function theme_blockify_site_slogan($variables) {
  */
 function theme_blockify_page_title($variables) {
   if ($variables['page_title'] !== '') {
-    return '<h1 class="title" id="page-title">' . $variables['page_title'] . '</h1>';
+    $title_attributes_array = array(
+      'class' => array('title'),
+      'id' => array('page-title'),
+    );
+    $title_attributes = drupal_attributes($title_attributes_array);
+
+    return '<h1' . $title_attributes . '>' . $variables['page_title'] . '</h1>';
   }
 }
 
