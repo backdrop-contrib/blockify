@@ -57,7 +57,7 @@ function blockify_block_info() {
       );
     }
   }
-  if (!$blocks) {
+  if (empty($blocks)) {
     $blocks = array();
   }
   return $blocks;
@@ -142,7 +142,10 @@ function _blockify_get_blocks($enabled_blocks_only = TRUE) {
  */
 function _blockify_is_enabled($delta) {
   $blocks = variable_get('blockify_blocks', array());
-  return $blocks[$delta];
+  if (!empty($blocks[$delta])) {
+    return TRUE;
+  }
+  return FALSE;
 }
 
 /**
