@@ -19,7 +19,7 @@ function blockify_help($path, $arg) {
 function blockify_menu() {
   $items = array();
 
-  $items['admin/structure/block/blockify'] = array(
+  $items['admin/config/user-interface/blockify'] = array(
     'title' => 'Blockify',
     'description' => 'Settings for the Blockify module.',
     'page callback' => 'drupal_get_form',
