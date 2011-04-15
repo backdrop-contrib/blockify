@@ -129,7 +129,7 @@ function blockify_get_content($delta) {
     case 'blockify-tabs':
       $variables['primary'] = menu_primary_local_tasks();
       $variables['secondary'] = menu_secondary_local_tasks();
-      return theme('menu_local_tasks', $variables);
+      return theme('blockify_menu_local_tasks', $variables);
 
     case 'blockify-actions':
       $variables['menu_local_actions'] = menu_local_actions();
@@ -200,6 +200,10 @@ function blockify_theme() {
     ),
     'blockify_feed_icons' => array(
       'variables' => array('feed_icons' => NULL),
+      'file' => 'blockify.theme.inc',
+    ),
+    'blockify_menu_local_tasks' => array(
+      'variables' => array('primary' => NULL, 'secondary' => NULL),
       'file' => 'blockify.theme.inc',
     ),
   );

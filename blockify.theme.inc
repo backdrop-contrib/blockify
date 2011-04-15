@@ -119,3 +119,12 @@ function theme_blockify_local_actions($variables) {
 function theme_blockify_feed_icons($variables) {
   return $variables['feed_icons'];
 }
+
+/**
+ * Returns the rendered menu local tasks.
+ *
+ * @ingroup themeable
+ */
+function theme_blockify_menu_local_tasks($variables) {
+  return '<div id="tabs">' . theme('menu_local_tasks', $variables) . '</div>';
+}
