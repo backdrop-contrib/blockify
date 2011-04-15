@@ -49,14 +49,32 @@ function blockify_permission() {
  */
 function blockify_block_info() {
   $block_list = _blockify_get_blocks();
-  foreach ($block_list as $block_delta => $block_name) {
-    if (_blockify_is_enabled($block_delta)) {
-      $blocks[$block_delta] = array(
-        'info' => $block_name,
+  foreach ($block_list as $delta => $name) {
+    if (_blockify_is_enabled($delta)) {
+      $blocks[$delta] = array(
+        'info' => $name,
         'cache' => DRUPAL_CACHE_GLOBAL,
       );
     }
   }
+
+  $cache_per_page_blocks = array(
+    'blockify-page-title',
+    'blockify-breadcrumb',
+    'blockify-tabs',
+    'blockify-actions',
+    'blockify-feed-icons',
+  );
+  foreach ($cache_per_page_blocks as $delta) {
+    if (!empty($blocks[$delta])) {
+      $blocks[$delta]['cache'] = DRUPAL_CACHE_PER_PAGE;
+    }
+  }
+
+  if (!empty($blocks['blockify-messages'])) {
+    $blocks['blockify-messages']['cache'] = DRUPAL_NO_CACHE;
+  }
+
   if (empty($blocks)) {
     $blocks = array();
   }
