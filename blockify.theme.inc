@@ -108,7 +108,7 @@ function theme_blockify_breadcrumb($variables) {
  * @ingroup themeable
  */
 function theme_blockify_local_actions($variables) {
-  return '<ul class="action-links">' . render($variables['menu_local_actions']) . '</ul>';
+  return '<ul class="action-links" class="clearfix">' . render($variables['menu_local_actions']) . '</ul>';
 }
 
 /**
@@ -126,5 +126,5 @@ function theme_blockify_feed_icons($variables) {
  * @ingroup themeable
  */
 function theme_blockify_menu_local_tasks($variables) {
-  return '<div id="tabs">' . theme('menu_local_tasks', $variables) . '</div>';
+  return '<div id="tabs" class="clearfix">' . theme('menu_local_tasks', $variables) . '</div>';
 }
