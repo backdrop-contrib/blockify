@@ -108,7 +108,10 @@ function theme_blockify_breadcrumb($variables) {
  * @ingroup themeable
  */
 function theme_blockify_local_actions($variables) {
-  return '<ul class="action-links" class="clearfix">' . render($variables['menu_local_actions']) . '</ul>';
+  $actions = render($variables['menu_local_actions']);
+  if (!empty($actions)) {
+    return '<ul class="action-links" class="clearfix">' . $actions . '</ul>';
+  }
 }
 
 /**
@@ -126,5 +129,9 @@ function theme_blockify_feed_icons($variables) {
  * @ingroup themeable
  */
 function theme_blockify_menu_local_tasks($variables) {
-  return '<div id="tabs" class="clearfix">' . theme('menu_local_tasks', $variables) . '</div>';
+  $tabs = theme('menu_local_tasks', $variables);
+  if (!empty($tabs)) {
+    return '<div id="tabs" class="clearfix">' . $tabs . '</div>';
+  }
 }
+
