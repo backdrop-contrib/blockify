@@ -61,8 +61,6 @@ function blockify_block_info() {
   $cache_per_page_blocks = array(
     'blockify-page-title',
     'blockify-breadcrumb',
-    'blockify-tabs',
-    'blockify-actions',
     'blockify-feed-icons',
   );
   foreach ($cache_per_page_blocks as $delta) {
@@ -71,8 +69,15 @@ function blockify_block_info() {
     }
   }
 
-  if (!empty($blocks['blockify-messages'])) {
-    $blocks['blockify-messages']['cache'] = DRUPAL_NO_CACHE;
+  $no_cache_blocks = array(
+    'blockify-tabs',
+    'blockify-actions',
+    'blockify-messages',
+  );
+  foreach ($no_cache_blocks as $delta) {
+    if (!empty($blocks[$delta])) {
+      $blocks[$delta]['cache'] = DRUPAL_NO_CACHE;
+    }
   }
 
   if (empty($blocks)) {
