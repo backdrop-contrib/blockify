@@ -13,7 +13,7 @@ function theme_blockify_logo($variables) {
   $site_name = filter_xss_admin(variable_get('site_name', 'Drupal'));
 
   // We only need the path.
-  $path = parse_url($variables['logo_path'], PHP_URL_PATH);
+  $path = file_create_url($variables['logo_path']);
 
   $image = array(
     '#theme' => 'image',
