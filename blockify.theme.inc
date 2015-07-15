@@ -10,7 +10,7 @@
  * @ingroup themeable
  */
 function theme_blockify_logo($variables) {
-  $site_name = filter_xss_admin(variable_get('site_name', 'Drupal'));
+  $site_name = filter_xss_admin(config_get('system.core', 'site_name'));
 
   // We only need the path.
   $path = file_create_url($variables['logo_path']);
@@ -41,7 +41,7 @@ function theme_blockify_logo($variables) {
  * @ingroup themeable
  */
 function theme_blockify_site_name($variables) {
-  $title = drupal_get_title();
+  $title = backdrop_get_title();
   $site_name = $variables['site_name'];
 
   // If there is no page title set for this page, use an h1 for the site name.
@@ -87,7 +87,7 @@ function theme_blockify_page_title($variables) {
       'class' => array('title'),
       'id' => array('page-title'),
     );
-    $title_attributes = drupal_attributes($title_attributes_array);
+    $title_attributes = backdrop_attributes($title_attributes_array);
 
     return '<h1' . $title_attributes . '>' . $variables['page_title'] . '</h1>';
   }

@@ -1,17 +1,9 @@
 <?php
 /**
  * @file
- * Exposes a number of core Drupal elements as blocks.
+ * Exposes a number of core Backdrop elements as blocks.
  */
 
-/**
- * Implements hook_help().
- */
-function blockify_help($path, $arg) {
-  if ($path == 'admin/help#blockify') {
-    return '<p>' . t('This module exposes a number of core Drupal elements as blocks.') . '</p>';
-  }
-}
 
 /**
  * Implements hook_menu()
@@ -22,7 +14,7 @@ function blockify_menu() {
   $items['admin/config/user-interface/blockify'] = array(
     'title' => 'Blockify',
     'description' => 'Settings for the Blockify module.',
-    'page callback' => 'drupal_get_form',
+    'page callback' => 'backdrop_get_form',
     'page arguments' => array('blockify_admin_settings'),
     'access arguments' => array('administer blockify'),
     'type' => MENU_NORMAL_ITEM,
@@ -53,7 +45,7 @@ function blockify_block_info() {
     if (_blockify_is_enabled($delta)) {
       $blocks[$delta] = array(
         'info' => $name,
-        'cache' => DRUPAL_CACHE_GLOBAL,
+        'cache' => BACKDROP_CACHE_GLOBAL,
       );
     }
   }
@@ -65,7 +57,7 @@ function blockify_block_info() {
   );
   foreach ($cache_per_page_blocks as $delta) {
     if (!empty($blocks[$delta])) {
-      $blocks[$delta]['cache'] = DRUPAL_CACHE_PER_PAGE;
+      $blocks[$delta]['cache'] = BACKDROP_CACHE_PER_PAGE;
     }
   }
 
@@ -76,7 +68,7 @@ function blockify_block_info() {
   );
   foreach ($no_cache_blocks as $delta) {
     if (!empty($blocks[$delta])) {
-      $blocks[$delta]['cache'] = DRUPAL_NO_CACHE;
+      $blocks[$delta]['cache'] = BACKDROP_NO_CACHE;
     }
   }
 
@@ -114,25 +106,25 @@ function blockify_get_content($delta) {
       if (empty($variables['logo_path'])) {
         $variables['logo_path'] = theme_get_setting('logo_path');
         if (empty($variables['logo_path']) || theme_get_setting('default_logo')) {
-          $variables['logo_path'] = drupal_get_path('theme', $theme_key) . '/logo.png';
+          $variables['logo_path'] = backdrop_get_path('theme', $theme_key) . '/logo.png';
         }
       }
       return theme('blockify_logo', $variables);
 
     case 'blockify-site-name':
-      $variables['site_name'] = filter_xss_admin(variable_get('site_name', 'Drupal'));
+      $variables['site_name'] = filter_xss_admin(config_get('system.core', 'site_name'));
       return theme('blockify_site_name', $variables);
 
     case 'blockify-site-slogan':
-      $variables['site_slogan'] = filter_xss_admin(variable_get('site_slogan', ''));
+      $variables['site_slogan'] = filter_xss_admin(config_get('system.core','site_slogan'));
       return theme('blockify_site_slogan', $variables);
 
     case 'blockify-page-title':
-      $variables['page_title'] = drupal_get_title();
+      $variables['page_title'] = backdrop_get_title();
       return theme('blockify_page_title', $variables);
 
     case 'blockify-breadcrumb':
-      $variables['breadcrumb'] = drupal_get_breadcrumb();
+      $variables['breadcrumb'] = backdrop_get_breadcrumb();
       return theme('blockify_breadcrumb', $variables);
 
     case 'blockify-messages':
@@ -148,7 +140,7 @@ function blockify_get_content($delta) {
       return theme('blockify_local_actions', $variables);
 
     case 'blockify-feed-icons':
-      $variables['feed_icons'] = drupal_get_feeds();
+      $variables['feed_icons'] = backdrop_get_feeds();
       return theme('blockify_feed_icons', $variables);
   }
 }
@@ -174,7 +166,7 @@ function _blockify_get_blocks($enabled_blocks_only = TRUE) {
  * Verify if a given blockify block is enabled in the blockify admin settings.
  */
 function _blockify_is_enabled($delta) {
-  $blocks = variable_get('blockify_blocks', array());
+  $blocks = config_get('blockify.settings', 'blockify_blocks');
   if (!empty($blocks[$delta])) {
     return TRUE;
   }
@@ -247,4 +239,15 @@ function blockify_menu_contextual_links_alter(&$links, $router_item, $root_path)
       'localized_options' => array('fragment' => 'edit-logo'),
     );
   }
+}
+
+ /**
+ * Implements hook_config_info().
+ */
+function blockify_config_info() {
+  $prefixes['blockify.settings'] = array(
+    'label' => t('Blockify settings'),
+    'group' => t('Blockify'),
+  );
+  return $prefixes;
 }

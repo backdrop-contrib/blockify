@@ -1,9 +1,11 @@
-#Blockify
+BLOCKIFY
+=======
 
-This module exposes a number of core Drupal elements as blocks.
+This module exposes a number of core Backdrop elements as blocks.
 Plays nice with context and panels.
 
-##Supported elements:
+SUPPORTED ELEMENTS:
+-------------------
 
 * Logo
 * Site name
@@ -18,10 +20,11 @@ Plays nice with context and panels.
 The module provides an administrations settings page to enable/disable blockify
 blocks installation-wide.
 
-##Remarks
+REMARKS
+-------
 
-If you remove elements such as $messages from your page.tpl.php you should
-ensure that the corresponding blockify block is assigned to a panel or theme
+If you remove elements such as $messages from your layout.tpl.php you should
+ensure that the corresponding blockify block is assigned to a theme
 region.
 
 If you don't do this, $messages won't be rendered at all. As a consequence other
@@ -30,8 +33,27 @@ modules might stop working properly.
 Example: without $messages being present, the devel module can't output its
 krumo info.
 
-##Authors, maintainers, and general kudos
+HOW TO INSTALL:
+---------------
+- Install this module using the official Backdrop CMS instructions at 
+https://backdropcms.org/guide/modules
+- Activate blocks at admin/config/user-interface/blockify.
+- Add blocks to your layout regions on the Layout UI.
+
+LICENSE
+---------------    
+
+This project is GPL v2 software. See the LICENSE.txt file in this directory 
+for complete text.
+
+CURRENT MAINTAINERS
+---------------    
+
+Looking for maintainers
+
+CREDITS   
+--------------- 
 
 * [Bantalabs](http://bantalabs.com)
-* [mortendk](http://drupal.org/user/65676)
-* [psynaptic](http://drupal.org/user/93429)
+* [mortendk](http://backdrop.org/user/65676)
+* [psynaptic](http://backdrop.org/user/93429)

@@ -8,5 +8,4 @@
  * Implements hook_uninstall().
  */
 function blockify_uninstall() {
-  variable_del('blockify_blocks');
 }
