@@ -41,34 +41,12 @@ function blockify_permission() {
  */
 function blockify_block_info() {
   $block_list = _blockify_get_blocks();
-  foreach ($block_list as $delta => $name) {
+  foreach ($block_list as $delta => $block) {
     if (_blockify_is_enabled($delta)) {
       $blocks[$delta] = array(
-        'info' => $name,
-        'cache' => BACKDROP_CACHE_GLOBAL,
+        'info' => $block['title'],
+        'description' => $block['description'],
       );
-    }
-  }
-
-  $cache_per_page_blocks = array(
-    'blockify-page-title',
-    'blockify-breadcrumb',
-    'blockify-feed-icons',
-  );
-  foreach ($cache_per_page_blocks as $delta) {
-    if (!empty($blocks[$delta])) {
-      $blocks[$delta]['cache'] = BACKDROP_CACHE_PER_PAGE;
-    }
-  }
-
-  $no_cache_blocks = array(
-    'blockify-tabs',
-    'blockify-actions',
-    'blockify-messages',
-  );
-  foreach ($no_cache_blocks as $delta) {
-    if (!empty($blocks[$delta])) {
-      $blocks[$delta]['cache'] = BACKDROP_NO_CACHE;
     }
   }
 
@@ -81,7 +59,7 @@ function blockify_block_info() {
 /**
  * Implements hook_block_view().
  */
-function blockify_block_view($delta = '') {
+function blockify_block_view($delta = '', $settings = array(), $contexts = array()) {
   $blocks = _blockify_get_blocks();
   foreach ($blocks as $block_delta => $block_name) {
     if ($delta == $block_delta && _blockify_is_enabled($block_delta)) {
@@ -123,10 +101,6 @@ function blockify_get_content($delta) {
       $variables['page_title'] = backdrop_get_title();
       return theme('blockify_page_title', $variables);
 
-    case 'blockify-breadcrumb':
-      $variables['breadcrumb'] = backdrop_get_breadcrumb();
-      return theme('blockify_breadcrumb', $variables);
-
     case 'blockify-messages':
       return theme('status_messages');
 
@@ -150,15 +124,38 @@ function blockify_get_content($delta) {
  */
 function _blockify_get_blocks($enabled_blocks_only = TRUE) {
   return array(
-    'blockify-logo' => t('Logo'),
-    'blockify-site-name' => t('Site name'),
-    'blockify-site-slogan' => t('Site slogan'),
-    'blockify-page-title' => t('Page title'),
-    'blockify-breadcrumb' => t('Breadcrumb'),
-    'blockify-tabs' => t('Tabs'),
-    'blockify-messages' => t('Messages'),
-    'blockify-actions' => t('Actions'),
-    'blockify-feed-icons' => t('Feed icons'),
+    'blockify-logo' => array(
+      'title' => t('Logo'),
+      'description' => t('The site logo'),
+    ),
+    'blockify-site-name' => array(
+      'title' => t('Site name'),
+      'description' => t('The site name'),
+    ),
+    'blockify-site-slogan' => array(
+      'title' => t('Site slogan'),
+      'description' => t('The site slogan'),
+    ),
+    'blockify-page-title' => array(
+      'title' => t('Page title'),
+      'description' => t('The current page title'),
+    ),
+    'blockify-tabs' => array(
+      'title' => t('Local tasks tabs'),
+      'description' => t('Local tasks tabs'),
+    ),
+    'blockify-messages' => array(
+      'title' => t('Messages'),
+      'description' => t('Site message alerts'),
+    ),
+    'blockify-actions' => array(
+      'title' => t('Local actions'),
+      'description' => t('Local actions tabs'),
+    ),
+    'blockify-feed-icons' => array(
+      'title' => t('Feed icons'),
+      'description' => t('Active RSS feed icons'),
+    ),
   );
 }
 
@@ -194,10 +191,6 @@ function blockify_theme() {
       'variables' => array('page_title' => NULL),
       'file' => 'blockify.theme.inc',
      ),
-    'blockify_breadcrumb' => array(
-      'variables' => array('breadcrumb' => NULL),
-      'file' => 'blockify.theme.inc',
-    ),
     'blockify_local_actions' => array(
       'variables' => array('menu_local_actions' => NULL),
       'file' => 'blockify.theme.inc',

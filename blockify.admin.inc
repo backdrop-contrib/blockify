@@ -9,11 +9,17 @@
  */
 function blockify_admin_settings() {
   $form = array();
+  $options = array();
+  $blocks = _blockify_get_blocks();
+  foreach($blocks as $block_delta => $block) {
+    $options[$block_delta] = $block['title'];
+  }
+  
 
   $form['blockify_blocks'] = array(
     '#type' => 'checkboxes',
     '#title' => t('Make the following blocks available'),
-    '#options' => _blockify_get_blocks(FALSE),
+    '#options' => $options,
     '#default_value' => config_get('blockify.settings', 'blockify_blocks'),
     '#description' => t('These blocks will be made available in places
       such as the blocks admin interface and the context UI.'),

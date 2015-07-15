@@ -11,7 +11,6 @@ SUPPORTED ELEMENTS:
 * Site name
 * Site slogan
 * Page title
-* Breadcrumb
 * Tabs
 * Messages
 * Local actions

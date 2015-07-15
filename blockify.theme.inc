@@ -94,15 +94,6 @@ function theme_blockify_page_title($variables) {
 }
 
 /**
- * Returns the rendered breadcrumb.
- *
- * @ingroup themeable
- */
-function theme_blockify_breadcrumb($variables) {
-  return theme('breadcrumb', $variables);
-}
-
-/**
  * Returns the rendered action items.
  *
  * @ingroup themeable
