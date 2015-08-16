@@ -22,14 +22,14 @@ blocks installation-wide.
 REMARKS
 -------
 
-If you remove elements such as $messages from your layout.tpl.php you should
+If you remove elements such as `$messages` from your `layout.tpl.php` you should
 ensure that the corresponding blockify block is assigned to a theme
 region.
 
-If you don't do this, $messages won't be rendered at all. As a consequence other
+If you don't do this, `$messages` won't be rendered at all. As a consequence other
 modules might stop working properly.
 
-Example: without $messages being present, the devel module can't output its
+Example: without `$messages` being present, the devel module can't output its
 krumo info.
 
 HOW TO INSTALL:
@@ -48,7 +48,7 @@ for complete text.
 CURRENT MAINTAINERS
 ---------------    
 
-Looking for maintainers
+[Wilmoth Andy Shillingford (docwilmot)](https://github.com/docwilmot)
 
 CREDITS   
 --------------- 

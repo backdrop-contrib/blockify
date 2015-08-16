@@ -6,7 +6,7 @@
 
 
 /**
- * Implements hook_menu()
+ * Implements hook_menu().
  */
 function blockify_menu() {
   $items = array();
@@ -94,7 +94,7 @@ function blockify_get_content($delta) {
       return theme('blockify_site_name', $variables);
 
     case 'blockify-site-slogan':
-      $variables['site_slogan'] = filter_xss_admin(config_get('system.core','site_slogan'));
+      $variables['site_slogan'] = filter_xss_admin(config_get('system.core', 'site_slogan'));
       return theme('blockify_site_slogan', $variables);
 
     case 'blockify-page-title':
@@ -190,7 +190,7 @@ function blockify_theme() {
     'blockify_page_title' => array(
       'variables' => array('page_title' => NULL),
       'file' => 'blockify.theme.inc',
-     ),
+    ),
     'blockify_local_actions' => array(
       'variables' => array('menu_local_actions' => NULL),
       'file' => 'blockify.theme.inc',
@@ -234,7 +234,7 @@ function blockify_menu_contextual_links_alter(&$links, $router_item, $root_path)
   }
 }
 
- /**
+/**
  * Implements hook_config_info().
  */
 function blockify_config_info() {
