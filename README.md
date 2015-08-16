@@ -2,7 +2,6 @@ BLOCKIFY
 =======
 
 This module exposes a number of core Backdrop elements as blocks.
-Plays nice with context and panels.
 
 SUPPORTED ELEMENTS:
 -------------------
