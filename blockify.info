@@ -1,4 +1,5 @@
 name = Blockify
 description = Exposes a number of core Backdrop elements as blocks.
+package = Layout
 backdrop = 1.x
 type = module
