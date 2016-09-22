@@ -80,13 +80,7 @@ function blockify_get_content($delta) {
 
   switch ($delta) {
     case 'blockify-logo':
-      $variables['logo_path'] = theme_get_setting('logo');
-      if (empty($variables['logo_path'])) {
-        $variables['logo_path'] = theme_get_setting('logo_path');
-        if (empty($variables['logo_path']) || theme_get_setting('default_logo')) {
-          $variables['logo_path'] = backdrop_get_path('theme', $theme_key) . '/logo.png';
-        }
-      }
+      $variables['logo_path'] = backdrop_get_logo();
       return theme('blockify_logo', $variables);
 
     case 'blockify-site-name':

@@ -12,12 +12,9 @@
 function theme_blockify_logo($variables) {
   $site_name = filter_xss_admin(config_get('system.core', 'site_name'));
 
-  // We only need the path.
-  $path = file_create_url($variables['logo_path']);
-
   $image = array(
     '#theme' => 'image',
-    '#path' => $path,
+    '#uri' => $variables['logo_path'],
     '#alt' => t('!site_name logo', array(
       '!site_name' => $site_name,
     ))
